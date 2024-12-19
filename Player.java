@@ -6,29 +6,6 @@ public class Player{
     int timesCommanderCast = 0;
     DeckColors deckColor;
 
-    public Player(){
-        this.playerName = "Unnamed";
-        this.deckColor = DeckColors.Colorless;
-        this.poisonCounter = 0;
-        this.floatMana = 0;
-        this.timesCommanderCast = 0;
-    }
-
-    public Player(DeckColors newColor){
-        this.playerName = "Unnamed";
-        this.deckColor = newColor;
-        this.poisonCounter = 0;
-        this.floatMana = 0;
-        this.timesCommanderCast = 0;
-    }
-
-    public Player(String name){
-        this.playerName = name;
-        this.deckColor = DeckColors.Colorless;
-        this.poisonCounter = 0;
-        this.floatMana = 0;
-        this.timesCommanderCast = 0;
-    }
 
     public Player(String name, DeckColors newColor){
         this.playerName = name;
@@ -36,6 +13,14 @@ public class Player{
         this.poisonCounter = 0;
         this.floatMana = 0;
         this.timesCommanderCast = 0;
+    }
+
+    public void setName(String newName){
+        this.playerName = newName;
+    }
+
+    public String getName(){
+        return this.playerName;
     }
 
     public void setDeckColor(DeckColors newColor){
@@ -76,5 +61,10 @@ public class Player{
 
     public int getCommanderCast(){
         return this.timesCommanderCast;
+    }
+
+    public String toString(){
+        String text = this.playerName + ": " + this.life + ", " + this.deckColor;
+        return text;
     }
 }

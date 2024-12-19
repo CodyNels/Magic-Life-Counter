@@ -3,49 +3,34 @@
  * Coin Flip
 */
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;  
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
 
 public class CounterPanel extends JPanel{
     
-    JPanel addPlayerPanel = new AddSettingsPanel();
+
+    public CounterPanel(Player[] players){
+        int amountOfPlayers = players.length;
+        this.setLayout(new GridLayout(2, (int) Math.ceil(amountOfPlayers / 2.0)));
+
+        for (int i = 0; i < amountOfPlayers; i++) {
+            JPanel playerPanel = new PlayerPanel(players[i]);
+            JLabel playerName = new JLabel(players[i].getName());
+            playerPanel.add(playerName);
+            playerPanel.setBackground(getBackground());
+            this.add(playerPanel);
 
 
-    public CounterPanel(){
-        this.setLayout(new BorderLayout());
-        this.setPreferredSize(new Dimension(1200,800));
-        JPanel settingsThing = new JPanel();
-        settingsThing.setLayout(new BorderLayout());
-        settingsThing.setPreferredSize(new Dimension(345, 800));
-        settingsThing.add(addPlayerPanel, BorderLayout.PAGE_START);
-        addPlayerPanel.setVisible(false);
-        JButton addPlayer = new JButton("+");
-        addPlayer.setPreferredSize(new Dimension(45,40));
-        addPlayer.addActionListener(new AddPlayerListener());
-        settingsThing.add(addPlayer, BorderLayout.LINE_END);
-        this.add(settingsThing, BorderLayout.PAGE_END);
-    }
-
-    private class AddPlayerListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(addPlayerPanel.isVisible()){
-                addPlayerPanel.setVisible(false);
-            }else{
-                addPlayerPanel.setVisible(true);
-            }
-            
         }
-        
     }
-    
 
 
 }
+
+
