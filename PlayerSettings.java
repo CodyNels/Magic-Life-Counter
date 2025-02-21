@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -25,7 +24,8 @@ public class PlayerSettings extends JPanel{
     JCheckBox greenCheck = new JCheckBox("Green");
     JCheckBox redCheck = new JCheckBox("Red");
     JCheckBox whiteCheck = new JCheckBox("White");
-    JTextArea playerName = new JTextArea("Player's Name");
+    String defaultName = "Player's Name";
+    JTextArea playerName = new JTextArea(defaultName);
     DeckColors color;
     int life;
 

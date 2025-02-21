@@ -1,23 +1,15 @@
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
-
-/*
- * Amount of Players
- * Starting Life
- * 
- * Name and Colors
- */
 
 
 public class SettingsPanel extends JPanel{
@@ -112,14 +104,13 @@ public class SettingsPanel extends JPanel{
         playersPanel.add(player8);
 
 
-
-
         JButton startGame = new JButton("Start Game");
         startGame.addActionListener(new StartGame());
         prePanel.add(customizePanel);
         prePanel.add(lifePanel);
         prePanel.add(playersPanel);
         prePanel.add(startGame);
+        prePanel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
         cardPanel.add(prePanel, "Panel1");
         this.add(cardPanel);
     }
