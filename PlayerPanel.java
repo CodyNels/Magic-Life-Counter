@@ -1,13 +1,12 @@
 import java.awt.GradientPaint;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
-
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -20,6 +19,7 @@ public class PlayerPanel extends JPanel{
     DeckColors deckColor;
     String playerName;
     int life;
+    int poisonAmount;
     Color colorless = new Color(204,194,192);
     Color black = new Color(82,82,82);
     Color blue = new Color(170,225,251);
@@ -36,6 +36,7 @@ public class PlayerPanel extends JPanel{
         this.deckColor = player.getDeckColors();
         this.playerName = player.getName();
         this.life = player.getLife();
+        this.poisonAmount = 0;
 
         JPanel nameAndNumber = new JPanel();
         nameAndNumber.setLayout(new BoxLayout(nameAndNumber, BoxLayout.Y_AXIS));
@@ -50,20 +51,80 @@ public class PlayerPanel extends JPanel{
         this.add(nameAndNumber);
 
         JPanel lifeButtons = new JPanel();
-        JButton lifeUp = new JButton("+");
-        JButton lifeDown = new JButton("-");
+        JButton lifeUp = new JButton("+1");
+
+        lifeUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                life++;
+                lifeLabel.setText("" + life);
+            }
+        });
+
+        JButton lifeDown = new JButton("-1");
+
+        lifeDown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                life--;
+                lifeLabel.setText("" + life);
+            }
+        });
+
+
+        JButton lifeUpBig = new JButton("+5");
+
+        lifeUpBig.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                life += 5;
+                lifeLabel.setText("" + life);
+            }
+        });
+
+        JButton lifeDownBig = new JButton("-5");
+
+        lifeDownBig.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                life -= 5;
+                lifeLabel.setText("" + life);
+            }
+        });
+
+        lifeButtons.add(lifeUpBig);
         lifeButtons.add(lifeUp);
         lifeButtons.add(lifeDown);
+        lifeButtons.add(lifeDownBig);
         lifeButtons.setOpaque(false);
         this.add(lifeButtons);
 
         JPanel poison = new JPanel();
         JLabel poisonLabel = new JLabel("Poison Counters: ");
-
-        JLabel poisonCounters = new JLabel("0");
+        
+        JLabel poisonCounters = new JLabel("" + poisonAmount);
 
         JButton poisonUp = new JButton("+");
+
+        poisonUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                poisonAmount++;
+                poisonCounters.setText("" + poisonAmount);
+            }
+        });
+
         JButton poisonDown = new JButton("-");
+
+        poisonDown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                poisonAmount--;
+                poisonCounters.setText("" + poisonAmount);
+            }
+        });
+
+
         poison.add(poisonLabel);
         poison.add(poisonCounters);
         poison.add(poisonUp);
@@ -347,12 +408,31 @@ public class PlayerPanel extends JPanel{
                 JLabel name = new JLabel(opponents[i].getName());
 
                 JLabel dmg = new JLabel("0");
-                JButton up = new JButton("+");
-                JButton down = new JButton("-");
+                JButton upCom = new JButton("+");
+
+                upCom.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        life++;
+                        // lifeLabel.setText("" + life);
+                    }
+                });
+
+                JButton downCom = new JButton("-");
+
+                downCom.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        life++;
+                        // lifeLabel.setText("" + life);
+                    }
+                });
+
                 uke.add(name);
                 uke.add(dmg);
-                uke.add(up);
-                uke.add(down);
+                uke.add(upCom);
+                uke.add(downCom);
+
                 uke.setOpaque(false);
                 oppPanel.add(uke);
             }
@@ -367,3 +447,7 @@ public class PlayerPanel extends JPanel{
         this.add(commanderPanel);
     }
 }
+
+//commander damage up
+//commander damage down
+
